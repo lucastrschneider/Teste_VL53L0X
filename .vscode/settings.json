@@ -21,4 +21,9 @@
         "files.trimTrailingWhitespace": false,
         "files.trimFinalNewlines": false,
     },
+    "files.associations": {
+        "stdio.h": "c",
+        "cstdio": "c",
+        "gpio.h": "c"
+    },
 }

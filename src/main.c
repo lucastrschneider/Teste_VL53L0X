@@ -12,7 +12,7 @@
 #include "mcu.h"
 #include "gpio.h"
 
-#include "thunder_vl53l0x.h"
+#include "distance_sensors.h"
 
 /*****************************************
  * Private Constant Definitions
@@ -40,16 +40,17 @@ int _write(int file, char* data, int len) {
 __attribute__((used)) static uint16_t distance[] = {0, 0, 0, 0, 0};
 
 int main(void) {
-    uint8_t Status = ERROR_NONE;
+    uint8_t status = ERROR_NONE;
 
     mcu_init();
     MX_USART2_UART_Init();
+    MX_I2C1_Init();
 
     HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
 
-    Status = vl53l0x_init();
+    status = distance_sensors_init();
 
-    if (Status != ERROR_NONE) {
+    if (status != ERROR_NONE) {
         HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_SET);
 
         for (;;)
@@ -57,19 +58,19 @@ int main(void) {
     }
 
     for (;;) {
-        if (Status == ERROR_NONE) {
-            Status |= just_update();
+        if (status == ERROR_NONE) {
+            status |= distance_sensors_update();
 
-            if (Status == ERROR_NONE) {
-                for (distance_sensor_position_t i = DS_SIDE_RIGHT; i < DS_MAX_POSITION; i++) {
-                    distance[i] = vl53l0x_get(i);
+            if (status == ERROR_NONE) {
+                for (distance_sensor_position_t i = DS_SIDE_RIGHT; i < DS_AMOUNT; i++) {
+                    distance[i] = distance_sensors_get(i);
                 }
             }
 
             HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
         } else {
             HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-            Status = vl53l0x_reinit();
+            status = vl53l0x_reinit();
 
             // OBS: reinit nao implementado
         }
