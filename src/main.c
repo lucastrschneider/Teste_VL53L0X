@@ -39,9 +39,9 @@ int _write(int file, char* data, int len) {
  *****************************************/
 __attribute__((used)) static uint16_t distance[] = {0, 0, 0, 0, 0};
 
-int main(void) {
-    uint8_t status = ERROR_NONE;
+uint8_t status = ERROR_NONE;
 
+int main(void) {
     mcu_init();
     MX_USART2_UART_Init();
     MX_I2C1_Init();
@@ -58,19 +58,18 @@ int main(void) {
     }
 
     for (;;) {
-        if (status == ERROR_NONE) {
-            status |= distance_sensors_update();
+        if ( /*status == ERROR_NONE*/ 1) {
+            status = distance_sensors_update();
 
-            if (status == ERROR_NONE) {
-                for (distance_sensor_position_t i = DS_SIDE_RIGHT; i < DS_AMOUNT; i++) {
-                    distance[i] = distance_sensors_get(i);
-                }
+            // distance_sensors_update();
+
+            for (distance_sensor_position_t i = DS_SIDE_RIGHT; i < DS_AMOUNT; i++) {
+                distance[i] = distance_sensors_get(i);
             }
 
             HAL_GPIO_TogglePin(GPIOA, GPIO_PIN_5);
         } else {
             HAL_GPIO_WritePin(GPIOA, GPIO_PIN_5, GPIO_PIN_RESET);
-            status = vl53l0x_reinit();
 
             // OBS: reinit nao implementado
         }

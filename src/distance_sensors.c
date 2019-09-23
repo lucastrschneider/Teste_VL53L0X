@@ -72,14 +72,14 @@ static VL53L0X_Dev_t sensors[] = {
         .xshut_pin = GPIO_PIN_8
     }
 };
-
 static VL53L0X_DeviceInfo_t sensors_info[DS_AMOUNT];
 static VL53L0X_RangingMeasurementData_t sensors_measurement[DS_AMOUNT];
 static vl53l0x_calibration_data_t sensors_calibration[DS_AMOUNT];
 
 static uint16_t actual_range[] = {MAX_RANGE, MAX_RANGE, MAX_RANGE, MAX_RANGE, MAX_RANGE};
 static const uint8_t used_sensors[] = {1, 1, 1, 1, 1};
-static const uint8_t i2c_addresses[] = {0x30, 0x34, 0x38, 0x3C, 0x40};
+static const uint8_t i2c_addresses[] = {0x30, 0x34, 0x38 /*0x52*/, 0x3C, 0x40};
+__attribute__((used)) static uint8_t sensors_status[] = {0, 0, 0, 0, 0};
 
 /*****************************************
  * Public Functions Bodies Definitions
@@ -137,7 +137,12 @@ uint8_t distance_sensors_update() {
             continue;
         }
 
-        status |= vl53l0x_update_range(&(sensors[i]), &(sensors_measurement[i]), &(actual_range[i]), MAX_RANGE);
+        sensors_status[i] =
+            vl53l0x_update_range(&(sensors[i]), &(sensors_measurement[i]), &(actual_range[i]), MAX_RANGE);
+
+        if (sensors_status[i] != 0) {
+            status |= 1 << (i + 1);
+        }
     }
 
     return status;
@@ -146,7 +151,7 @@ uint8_t distance_sensors_update() {
 uint16_t distance_sensors_get(distance_sensor_position_t sensor) {
     if ((sensors[(int) sensor]).present) {
         return actual_range[(int) sensor];
-    } else {
-        return -1;
     }
+
+    return -1;
 }
