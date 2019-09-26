@@ -1,5 +1,5 @@
 /**
- * @file dsitance_sensors.h
+ * @file distance_sensors.h
  *
  * @brief Example using 5 Time Of Flight sensors with the VL53L0X lib
  *
@@ -9,6 +9,7 @@
 #ifndef DISTANCE_SENSORS_H
 #define DISTANCE_SENSORS_H
 
+#include <stdint.h>
 #include "vl53l0x.h"
 
 /*****************************************

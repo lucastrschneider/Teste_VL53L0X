@@ -77,6 +77,7 @@ static VL53L0X_RangingMeasurementData_t sensors_measurement[DS_AMOUNT];
 static vl53l0x_calibration_data_t sensors_calibration[DS_AMOUNT];
 
 static uint16_t actual_range[] = {MAX_RANGE, MAX_RANGE, MAX_RANGE, MAX_RANGE, MAX_RANGE};
+static const uint8_t used_sensors[] = {1, 1, 1, 1, 1};
 static const uint8_t i2c_addresses[] = {0x30, 0x34, 0x38, 0x3C, 0x40};
 __attribute__((used)) static uint8_t sensors_status[] = {0, 0, 0, 0, 0};
 
@@ -156,10 +157,9 @@ uint16_t distance_sensors_get(distance_sensor_position_t sensor) {
 }
 
 /**
- * @brief vl53l0x_plataform function, that needs to be implemented by the application
+ * @brief VL53L0X_plataform function, that needs to be implemented by the application
  */
-
-VL53L0X_Error VL53L0X_PollingDelay(VL53L0X_DEV Dev) {
-    mcu_sleep(VL53L0X_POLLINGDELAY_LOOPNB);
+VL53L0X_Error VL53L0X_Delay(uint32_t ms) {
+    mcu_sleep(ms);
     return VL53L0X_ERROR_NONE;
 }
