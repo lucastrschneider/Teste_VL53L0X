@@ -24,7 +24,7 @@ static VL53L0X_Dev_t sensors[] = {
     { // 0
         .I2cDevAddr = VL53L0X_DEFAULT_ADDRESS,
         .comms_type = 1, // I2C
-        .comms_speed_khz = VL53L0X_DEFAULT_COMM_SPEED,
+        .comms_speed_khz = VL53L0X_DEFAULT_COMM_SPEED_HZ,
         .present = 0,
         .calibrated = 0,
         .hi2c = &hi2c1,
@@ -34,7 +34,7 @@ static VL53L0X_Dev_t sensors[] = {
     { // 1
         .I2cDevAddr = VL53L0X_DEFAULT_ADDRESS,
         .comms_type = 1, // I2C
-        .comms_speed_khz = VL53L0X_DEFAULT_COMM_SPEED,
+        .comms_speed_khz = VL53L0X_DEFAULT_COMM_SPEED_HZ,
         .present = 0,
         .calibrated = 0,
         .hi2c = &hi2c1,
@@ -44,7 +44,7 @@ static VL53L0X_Dev_t sensors[] = {
     { // 2
         .I2cDevAddr = VL53L0X_DEFAULT_ADDRESS,
         .comms_type = 1, // I2C
-        .comms_speed_khz = VL53L0X_DEFAULT_COMM_SPEED,
+        .comms_speed_khz = VL53L0X_DEFAULT_COMM_SPEED_HZ,
         .present = 0,
         .calibrated = 0,
         .hi2c = &hi2c1,
@@ -54,7 +54,7 @@ static VL53L0X_Dev_t sensors[] = {
     { // 3
         .I2cDevAddr = VL53L0X_DEFAULT_ADDRESS,
         .comms_type = 1, // I2C
-        .comms_speed_khz = VL53L0X_DEFAULT_COMM_SPEED,
+        .comms_speed_khz = VL53L0X_DEFAULT_COMM_SPEED_HZ,
         .present = 0,
         .calibrated = 0,
         .hi2c = &hi2c1,
@@ -64,7 +64,7 @@ static VL53L0X_Dev_t sensors[] = {
     { // 4
         .I2cDevAddr = VL53L0X_DEFAULT_ADDRESS,
         .comms_type = 1, // I2C
-        .comms_speed_khz = VL53L0X_DEFAULT_COMM_SPEED,
+        .comms_speed_khz = VL53L0X_DEFAULT_COMM_SPEED_HZ,
         .present = 0,
         .calibrated = 0,
         .hi2c = &hi2c1,
