@@ -13,6 +13,7 @@
  * Private Constants
  *****************************************/
 
+#define VL53L0X_DEFAULT_COMM_SPEED_HZ 100
 #define INIT_RESET_SLEEP_TIME_MS 10 // TODO: pode diminuir isso?
 #define MAX_RANGE 600
 

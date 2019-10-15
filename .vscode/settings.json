@@ -24,6 +24,7 @@
     "files.associations": {
         "stdio.h": "c",
         "cstdio": "c",
-        "gpio.h": "c"
+        "gpio.h": "c",
+        "distance_sensors.h": "c"
     },
 }

@@ -16,8 +16,6 @@
  * Public Constants
  *****************************************/
 
-#define VL53L0X_DEFAULT_COMM_SPEED_HZ 100
-
 typedef enum _distance_sensor_position {
     DS_SIDE_RIGHT = 0,
     DS_FRONT_RIGHT = 1,
